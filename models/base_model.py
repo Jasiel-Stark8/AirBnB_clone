@@ -7,7 +7,7 @@ import uuid
 class BaseModel():
     """Base class for all models"""
     
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.id = str(uuid.uuid4())
         self.created_at = datetime.utcnow().isoformat()
         self.updated_at = datetime.utcnow().isoformat()
