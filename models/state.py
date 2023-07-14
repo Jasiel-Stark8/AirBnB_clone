@@ -1,4 +1,4 @@
-class State:
+class State:c
 
 
 def __init__(self,name):
