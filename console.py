@@ -1,18 +1,19 @@
 #!/usr/bin/env python
 """ HBNB cmd console """
 import cmd
-from models.base_model import BaseModel
+import readline
+import sys
+from models.engine.file_storage import FileStorage
 
-class Console(cmd.Cmd):
+class HBNB(cmd.Cmd):
     """_summary_
 
-    Args:
-        cmd (_type_): _description_
-
-    Returns:
-        _type_: _description_
+    functions:
+        cmd (prompt): returns command prompt
+        intro: Welcome prompt message
+        quit: Handles cmd exit
     """
-    prompt = "cmd"
+    prompt = "(hbnb) "
     intro = "Welcome to HBNB cmd console\n"
 
     # def do_help(self):
@@ -27,13 +28,25 @@ class Console(cmd.Cmd):
     #     print("  set - set an existing model")
     
     def do_exit(self, arg):
-        print("Exiting console")
+        try:
+            print("Exiting console")
+            return True
+        except KeyboardInterrupt:
+            print("Exiting console")
         return True
-    
-    def do_create(self, arg):
-        """create an object of Base and print it's ID"""
-        Object = BaseModel()
-        print(object.id)
-    
+
+    def EOF(self, arg):
+        """Handle End Of File Error"""
+        try:
+            readline(sys.argv)
+            if sys.argv[1:] == '\n':
+                return True
+        except EOFError:
+            return ""
+        
+    def do_empty_line(self, arg):
+        """an empty line + ENTER shouldn’t execute anything"""
+        
+
 if __name__ == "__main__":
-    Console().cmdloop()
+    HBNB().cmdloop()
