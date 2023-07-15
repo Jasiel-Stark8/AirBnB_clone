@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """Console Module"""
 
-import cmd 
+import cmd
+import json
 from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
@@ -10,33 +11,50 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, args):
         """Quit command to exit the program"""
-        return True 
+        return True
 
     def do_EOF(self, args):
         """Exits on EOF"""
         return True
 
-    def emptyline(self):
+    def do_emptyline(self):
         """Don't execute anything on empty line"""
-        pass
+        pass  # Leave like this
 
-    def create(self):
+    def do_create(self, ):
         """Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id"""
-        pass
+        if not __class__.__name__:
+            print("** class name missing **")
+        if __class__.__name__ is None:
+            print("** class doesn't exist **")
+        
+        else:
+            create = BaseModel()
+            with open(f"{create.id}.json", "w", encoding='UTF-8') as f:
+                json.dump(create.__dict__, f)
 
-    def show(self):
+    def do_show(self):
         """Prints the string representation of an instance based on the class name and id"""
-        pass
+        if not __class__.__name__:
+            print("** class name missing **")
+        if __class__.__name__ is None:
+            print("** class doesn't exist **")
+        if not id:
+            print("** instance id missing **")
+        if (__class__.__name__, id) not in 'create.id.json':
+            print("** no instance found **")
+        print(f"{self.__class__.__name__} {'create.id.json'}")
 
-    def destroy(self):
+    def do_destroy(self):
         """Deletes an instance based on the class name and id (save the change into the JSON file)"""
-        pass
+        if not __class__.__name__:
+            print("")
 
-    def all(self):
+    def do_all(self):
         """Prints all string representation of all instances based or not on the class name"""
         pass
 
-    def update(self):
+    def do_update(self):
         """ Updates an instance based on the class name and id by adding \
             or updating attribute (save the change into the JSON file)
         """
