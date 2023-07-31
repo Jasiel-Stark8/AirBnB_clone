@@ -3,7 +3,7 @@
     height: 70px;
     width: 100%;
     border: 1px solid #DDDDDD;
-    border-radius: 4px;
+    border-radius: 20px;
     display: flex;
 }
 
@@ -22,7 +22,7 @@
     height: 48px;
     width: 20%;
     border: 0;
-    border-radius: 4px;
+    border-radius: 50px;
     margin: auto 30px;
 }
 
